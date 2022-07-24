@@ -2,4 +2,4 @@ FROM tomcat
 
 
 
-COPY target/* /usr/local/tomcat/webapps/
+COPY /target/* /usr/local/tomcat/webapps/
