@@ -41,10 +41,11 @@ pipeline {
 
             }
          stage('Deployment') {
+	 agnet { label 'docker_node_build1'}
             steps {
                 echo 'Deploying....'
 
-
+              sh 'docker container run -dt --name appwar -p 8084:8080 deepakkumarawsdevops/newappwar:$BUILD_NUMBER'
             }
         }
 
