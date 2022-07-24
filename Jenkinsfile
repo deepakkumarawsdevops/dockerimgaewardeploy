@@ -14,7 +14,7 @@ pipeline {
            stage('BuildDockerImage') {
             steps {
                 echo 'Imageing..'
-                sh 'docker build -t deepakkumarawsdevops/newapp:$BUILD_NUMBER .'
+                sh 'docker build -t deepakkumarawsdevops/newappwar:$BUILD_NUMBER .'
 
 
             }
@@ -35,7 +35,7 @@ pipeline {
 
           steps {
              echo 'Releasing...'
-              sh 'docker push deepakkumarawsdevops/newapp:$BUILD_NUMBER'
+              sh 'docker push deepakkumarawsdevops/newappwar:$BUILD_NUMBER'
 
               }
 
