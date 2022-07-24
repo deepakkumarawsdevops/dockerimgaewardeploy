@@ -1,5 +1,5 @@
 pipeline {
-    agent  { label 'docker_node_build'}
+    agent  { label 'docker_node_build1'}
 
     environment
     {
@@ -12,7 +12,7 @@ pipeline {
 
           stage('Java Build')
 	  {
-	  agent { label 'docker_node_build1'}
+	  
           steps
 	  {
             echo 'Building'
@@ -24,10 +24,10 @@ pipeline {
            stage('BuildDockerImage') {
             steps {
                 echo 'Imageing..'
-                 sh 'docker build -t deepakkumarawsdevops/newappwars:$BUILD_NUMBER .'
+                 sh 'docker build -t deepakkumarawsdevops/newappwarss:$BUILD_NUMBER .'
+                                                        
  
- 
-            }
+            }  
         }
 
         stage('LogintoDockerHub')
@@ -35,7 +35,7 @@ pipeline {
         {
          steps{
            sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-
+                                                               
          }
 
 
@@ -45,7 +45,7 @@ pipeline {
 
           steps {
              echo 'Releasing...'
-              sh 'docker push deepakkumarawsdevops/newappwars:$BUILD_NUMBER'
+              sh 'docker push deepakkumarawsdevops/newappwarss:$BUILD_NUMBER'
 
               }
 
@@ -55,7 +55,7 @@ pipeline {
             steps {
                 echo 'Deploying....'
 
-              sh 'docker container run -dt --name appwar -p 8085:8080 deepakkumarawsdevops/newappwar:$BUILD_NUMBER'
+              sh 'docker container run -dt --name appwarss -p 8085:8080 deepakkumarawsdevops/newappwarss:$BUILD_NUMBER'
             }
         }
 
