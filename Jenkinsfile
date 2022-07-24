@@ -10,13 +10,23 @@ pipeline {
 
     stages {
 
+          stage('Java Build')
+	  {
+	  agent { label 'docker_node_build1'}
+          steps
+	  {
+            echo 'Building'
+	    sh 'mvn package'
+	    sh 'mv install'
+	  } 
 
+	  }
            stage('BuildDockerImage') {
             steps {
                 echo 'Imageing..'
-                sh 'docker build -t deepakkumarawsdevops/newappwar:$BUILD_NUMBER .'
-
-
+                 sh 'docker build -t deepakkumarawsdevops/newappwars:$BUILD_NUMBER .'
+ 
+ 
             }
         }
 
@@ -35,7 +45,7 @@ pipeline {
 
           steps {
              echo 'Releasing...'
-              sh 'docker push deepakkumarawsdevops/newappwar:$BUILD_NUMBER'
+              sh 'docker push deepakkumarawsdevops/newappwars:$BUILD_NUMBER'
 
               }
 
@@ -45,7 +55,7 @@ pipeline {
             steps {
                 echo 'Deploying....'
 
-              sh 'docker container run -dt --name appwar -p 8084:8080 deepakkumarawsdevops/newappwar:$BUILD_NUMBER'
+              sh 'docker container run -dt --name appwar -p 8085:8080 deepakkumarawsdevops/newappwar:$BUILD_NUMBER'
             }
         }
 
