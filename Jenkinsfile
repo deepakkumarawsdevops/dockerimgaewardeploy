@@ -1,5 +1,5 @@
 pipeline {
-    agent  { label 'docker_node_build1'}
+    agent  { label 'docker_node_build'}
 
     environment
     {
@@ -24,7 +24,7 @@ pipeline {
            stage('BuildDockerImage') {
             steps {
                 echo 'Imageing..'
-                 sh 'docker build -t deepakkumarawsdevops/newappwarss:$BUILD_NUMBER .'
+                 sh 'docker build -t deepakkumarawsdevops/warapp:$BUILD_NUMBER .'
                                                         
  
             }  
@@ -45,7 +45,7 @@ pipeline {
 
           steps {
              echo 'Releasing...'
-              sh 'docker push deepakkumarawsdevops/newappwarss:$BUILD_NUMBER'
+              sh 'docker push deepakkumarawsdevops/warapp:$BUILD_NUMBER'
 
               }
 
@@ -55,7 +55,7 @@ pipeline {
             steps {
                 echo 'Deploying....'
 
-              sh 'docker container run -dt --name appwarss -p 8085:8080 deepakkumarawsdevops/newappwarss:$BUILD_NUMBER'
+              sh 'docker container run -dt --name localapp -p 8085:8080 deepakkumarawsdevops/warapp:$BUILD_NUMBER'
             }
         }
 
