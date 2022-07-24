@@ -41,7 +41,7 @@ pipeline {
 
             }
          stage('Deployment') {
-	 agnet { label 'docker_node_build1'}
+	 agent { label 'docker_node_build1'}
             steps {
                 echo 'Deploying....'
 
