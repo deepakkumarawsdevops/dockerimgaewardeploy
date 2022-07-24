@@ -17,7 +17,7 @@ pipeline {
 	  {
             echo 'Building'
 	    sh 'mvn package'
-	    sh 'mv install'
+	    sh 'mvn install'
 	  } 
 
 	  }
