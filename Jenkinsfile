@@ -35,7 +35,7 @@ pipeline {
 
           steps {
              echo 'Releasing...'
-              sh 'docker push deepakkumarawsdevops/newwarapp:$BUILD_NUMBER'
+              sh 'docker push deepakkumarawsdevops/newapp:$BUILD_NUMBER'
 
               }
 
